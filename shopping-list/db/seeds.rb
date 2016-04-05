@@ -5,3 +5,18 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Item.delete_all
+List.delete_all
+
+List.create(title: "Grocery")
+
+eggs = Item.create(name: "Eggs")
+beer = Item.create(name: "Beer")
+diapers = Item.create(name: "Diapers")
+
+l = List.first
+
+l.items << eggs
+l.items << beer
+l.items << diapers
