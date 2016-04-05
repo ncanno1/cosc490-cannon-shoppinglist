@@ -1,0 +1,13 @@
+.page-header
+  %h1 List
+
+%h2= @list.title
+
+%ul
+  - @items.each do |item|
+    %li= item.name
+
+= link_to "Back", lists_path, class: 'btn btn-info'
+= link_to "Edit", edit_list_path(@list), class: 'btn btn-default'
+= link_to "Add Items", lists_add_item_path(@list), class: 'btn btn-default'
+= link_to "Delete", list_path(@list), method: :delete, class: 'btn btn-danger'

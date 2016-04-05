@@ -1,0 +1,17 @@
+.page-header
+  %h1 Shopping Lists
+  %table.table.table-striped
+    %thead
+      %tr
+        %th ID
+        %th List
+        %th
+    %tbody
+      - @lists.each do |list|
+        %tr
+          %td= list.id
+          %td= list.title
+          %td
+            = link_to "View", list_path(list), class: 'btn btn-xs btn-info'
+            = link_to "Delete", list_path(list), method: :delete, class: 'btn btn-xs btn-danger'
+  = link_to "New List", new_list_path, class: 'btn btn-primary'
