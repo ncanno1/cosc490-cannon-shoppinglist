@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :add_item, :add, :remove_item, :remove]
+  before_action :set_item, only: [:remove_item, :remove]
 
   # GET /lists
   # GET /lists.json
@@ -14,7 +15,25 @@ class ListsController < ApplicationController
   end
 
   def add_item
+    @items = @list.items.all
     @item = Item.new
+  end
+
+  def add
+    @item = Item.new(item_params)
+    if @item.save
+      @list.items << @item
+      redirect_to list_add_item_path(@list)
+    end
+  end
+
+  def remove_item
+    @items = @list.items.all
+  end
+
+  def remove
+    @list.items.delete(@item)
+    redirect_to list_remove_items_path(@list)
   end
 
   # GET /lists/new
@@ -59,6 +78,7 @@ class ListsController < ApplicationController
   # DELETE /lists/1
   # DELETE /lists/1.json
   def destroy
+    @list.items.delete_all
     @list.destroy
     respond_to do |format|
       format.html { redirect_to lists_url, notice: 'List was successfully destroyed.' }
@@ -72,8 +92,18 @@ class ListsController < ApplicationController
       @list = List.find(params[:id])
     end
 
+    def set_item
+      if params[:item_id] != nil
+        @item = Item.find(params[:item_id])
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
       params.require(:list).permit(:title)
+    end
+
+    def item_params
+      params.require(:item).permit(:name)
     end
 end

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   get 'lists/add_item'
+  get 'lists/add_item/:id', to: 'lists#add_item', as: 'list_add_item'
+  get 'lists/remove_item/:id', to: 'lists#remove_item', as: 'list_remove_items'
+  post 'lists/remove_item/:id', to: 'lists#remove_item', as: 'list_remove_item'
+  post 'lists/remove/:id/:item_id', to: 'lists#remove', as: 'list_item_removed'
   post 'lists/add_item'
+  post 'lists/add'
   resources :lists
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

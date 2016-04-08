@@ -1,0 +1,19 @@
+.page-header
+  %h1 Edit Items
+
+%h2= @list.title
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th ID
+      %th Item
+      %th
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td= item.id
+        %td= item.name
+        %td= link_to("Delete", list_item_removed_path(@list, item), method: :post, class: 'btn btn-xs btn-danger')
+
+= link_to "Back", list_path(@list), class: 'btn btn-info'
