@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'lists/add_item'
   post 'lists/add'
   resources :lists
+  root 'lists#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
